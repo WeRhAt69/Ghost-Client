@@ -7,12 +7,17 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 import com.example.gui.GhostClientScreen;
+import com.example.module.ModuleManager;
+import com.example.module.Module;
 
 public class GhostClientMod implements ClientModInitializer {
     private static KeyBinding openMenuKey;
 
     @Override
     public void onInitializeClient() {
+        // 1. Initialisiere den ModuleManager direkt beim Spielstart
+        ModuleManager.getInstance();
+
         // Register key binding - Right Shift to open menu
         openMenuKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.ghostclient.menu",
@@ -23,8 +28,20 @@ public class GhostClientMod implements ClientModInitializer {
 
         // Register client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            // Menü öffnen bei Tastendruck
             while (openMenuKey.wasPressed()) {
-                client.setScreen(new GhostClientScreen());
+                if (client.player != null && client.currentScreen == null) {
+                    client.setScreen(new GhostClientScreen());
+                }
+            }
+
+            // 2. Führe die Logik aller aktivierten Module in jedem Tick aus
+            if (client.player != null) {
+                for (Module module : ModuleManager.getInstance().getModules()) {
+                    if (module.isEnabled()) {
+                        module.onTick();
+                    }
+                }
             }
         });
     }
