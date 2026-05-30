@@ -1,11 +1,9 @@
 package com.example.module;
 
-import com.example.module.combat.AutoClicker;
-import com.example.module.combat.AimAssist;
-import com.example.module.combat.Reach;
-import com.example.module.movement.Velocity;
-import com.example.module.utility.Search;
-import com.example.module.utility.Nametags;
+import com.example.module.combat.*;
+import com.example.module.movement.*;
+import com.example.module.render.*;
+import com.example.module.utility.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +13,32 @@ public class ModuleManager {
     private static ModuleManager instance;
     private final List<Module> modules = new ArrayList<>();
 
-    private Grid() {} // Verhindert Instanziierung außerhalb
     private ModuleManager() {
-        // COMBAT MODULES
+        // ⚔️ Combat
         modules.add(new AutoClicker());
         modules.add(new AimAssist());
         modules.add(new Reach());
-        
-        // MOVEMENT MODULES
+        modules.add(new TriggerBot());
+        modules.add(new Teams());
+
+        // 🏃 Movement
         modules.add(new Velocity());
-        
-        // UTILITY MODULES
+        modules.add(new Sprint());
+        modules.add(new Speed());
+        modules.add(new Fly());
+        modules.add(new Strafe());
+
+        // 👁️ Render
+        modules.add(new ESP());
+        modules.add(new Chams());
+        modules.add(new Fullbright());
+
+        // 🛠️ Utility
         modules.add(new Search());
         modules.add(new Nametags());
+        modules.add(new FastPlace());
+        modules.add(new AntiAFK());
+        modules.add(new Throwpot());
     }
 
     public static ModuleManager getInstance() {
@@ -47,12 +58,10 @@ public class ModuleManager {
                 .collect(Collectors.toList());
     }
 
-    public static boolean isModuleEnabled(String name) {
-        for (Module m : getInstance().getModules()) {
-            if (m.getName().equalsIgnoreCase(name)) {
-                return m.isEnabled();
-            }
-        }
-        return false;
+    public Module getModuleByName(String name) {
+        return modules.stream()
+                .filter(m -> m.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 }

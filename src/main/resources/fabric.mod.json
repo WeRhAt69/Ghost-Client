@@ -3,24 +3,18 @@
   "id": "ghostclient",
   "version": "${version}",
   "name": "Ghost Client",
-  "description": "A modern client mod with an advanced menu GUI system",
-  "authors": [
-    "WeRhAt69"
-  ],
-  "contact": {
-    "homepage": "https://github.com/WeRhAt69/Ghost-Client"
-  },
+  "description": "Ghost Client Framework im Vape-Lite Design",
+  "authors": ["WeRhAt69"],
   "license": "CC0-1.0",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
       "com.example.GhostClientMod"
     ]
   },
-  "mixins": [],
   "depends": {
-    "fabricloader": ">=0.19.2",
+    "fabricloader": ">=0.15.11",
     "minecraft": "26.1.2",
-    "java": ">=21"
+    "fabric-api": "*"
   }
 }
