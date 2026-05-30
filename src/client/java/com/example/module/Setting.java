@@ -1,14 +1,9 @@
 package com.example.module;
 
-public enum Category {
-    COMBAT("Combat"),
-    MOVEMENT("Movement"),
-    RENDER("Render"),
-    UTILITY("Utility");
-
+public abstract class Setting {
     private final String name;
 
-    Category(String name) {
+    public Setting(String name) {
         this.name = name;
     }
 

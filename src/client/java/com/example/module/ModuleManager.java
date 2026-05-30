@@ -2,7 +2,10 @@ package com.example.module;
 
 import com.example.module.combat.AutoClicker;
 import com.example.module.combat.AimAssist;
-import com.example.module.render.Velocity;
+import com.example.module.combat.Reach;
+import com.example.module.movement.Velocity;
+import com.example.module.utility.Search;
+import com.example.module.utility.Nametags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +15,19 @@ public class ModuleManager {
     private static ModuleManager instance;
     private final List<Module> modules = new ArrayList<>();
 
+    private Grid() {} // Verhindert Instanziierung außerhalb
     private ModuleManager() {
         // COMBAT MODULES
         modules.add(new AutoClicker());
         modules.add(new AimAssist());
+        modules.add(new Reach());
         
-        // RENDER MODULES
+        // MOVEMENT MODULES
         modules.add(new Velocity());
         
-        // UTILITY & PLATZHALTER (Damit deine README-Liste vollzählig ist)
-        modules.add(new PlaceholderModule("Reach", Category.RENDER));
-        modules.add(new PlaceholderModule("Search", Category.UTILITY));
-        modules.add(new PlaceholderModule("Nametags", Category.UTILITY));
+        // UTILITY MODULES
+        modules.add(new Search());
+        modules.add(new Nametags());
     }
 
     public static ModuleManager getInstance() {
@@ -50,12 +54,5 @@ public class ModuleManager {
             }
         }
         return false;
-    }
-
-    // Hilfsklasse für Module, die noch keinen eigenen Code haben
-    private static class PlaceholderModule extends Module {
-        public PlaceholderModule(String name, Category category) {
-            super(name, category);
-        }
     }
 }
