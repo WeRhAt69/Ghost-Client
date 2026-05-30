@@ -1,14 +1,17 @@
 package com.example.module;
 
 public enum Category {
-    FAVORITES("Favorites"),
     COMBAT("Combat"),
     RENDER("Render"),
     UTILITY("Utility");
 
-    public final String displayName;
+    private final String name;
 
-    Category(String displayName) {
-        this.displayName = displayName;
+    Category(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
