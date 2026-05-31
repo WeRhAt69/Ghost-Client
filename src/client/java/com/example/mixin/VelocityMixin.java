@@ -17,14 +17,11 @@ public class VelocityMixin {
         Velocity velocityModule = (Velocity) ModuleManager.getInstance().getModuleByName("Velocity");
 
         if (velocityModule != null && velocityModule.isEnabled()) {
-            // Berechnet die Prozentwerte aus den Vape-GUI-Slidern (z. B. 82% -> 0.82)
             double pctH = Velocity.horizontal.getValue() / 100.0;
             double pctV = Velocity.vertical.getValue() / 100.0;
 
-            // Dämpft die Bewegung auf den Achsen ab
+            // Anti-Cheat Bypass: Modifiziert nur die Geschwindigkeit, lässt Server-Pakete intakt
             player.setVelocity(x * pctH, y * pctV, z * pctH);
-            
-            // Verhindert, dass das normale Minecraft den vollen Rückstoß anwendet
             info.cancel();
         }
     }
