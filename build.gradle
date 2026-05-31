@@ -1,10 +1,10 @@
 buildscript {
     repositories {
-        maven { url = "https://fabricmc.net" }
+        maven { url = "https://maven.fabricmc.net/" }
         mavenCentral()
     }
     dependencies {
-        classpath "net.fabricmc:fabric-loom:1.9.2"
+        classpath "net.fabricmc:fabric-loom:1.6-SNAPSHOT"
     }
 }
 
@@ -19,7 +19,7 @@ base {
 }
 
 repositories {
-    maven { url = "https://fabricmc.net" }
+    maven { url = "https://maven.fabricmc.net/" }
     mavenCentral()
 }
 
@@ -28,12 +28,6 @@ dependencies {
     mappings "net.fabricmc:yarn:26.1.2+build.1:v2"
     modImplementation "net.fabricmc:fabric-loader:0.15.11"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.149.1+26.1.2"
-}
-
-loom {
-    mixin {
-        defaultRefmapName = "ghostclient-refmap.json"
-    }
 }
 
 processResources {
