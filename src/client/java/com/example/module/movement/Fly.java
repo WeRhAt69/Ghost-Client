@@ -15,6 +15,7 @@ public class Fly extends Module {
         addSetting(flySpeed);
     }
 
+    @Override
     public void onTick() {
         if (!isEnabled() || mc.player == null) return;
 
